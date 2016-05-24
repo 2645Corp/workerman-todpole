@@ -1,8 +1,9 @@
-var WebSocketService = function(model, webSocket) {
+var WebSocketService = function(model, webSocket, app) {
 	var webSocketService = this;
 	
 	var webSocket = webSocket;
 	var model = model;
+	var app = app;
 	
 	this.hasConnection = false;
 	
@@ -47,7 +48,7 @@ var WebSocketService = function(model, webSocket) {
 		
 		tadpole.angle = data.angle;
 		tadpole.momentum = data.momentum;
-		
+		tadpole.size = data.size;	
 		tadpole.timeSinceLastServerUpdate = 0;
 	}
 	
@@ -94,6 +95,7 @@ var WebSocketService = function(model, webSocket) {
 			type: 'update',
 			x: tadpole.x.toFixed(1),
 			y: tadpole.y.toFixed(1),
+			size: tadpole.size.toFixed(3),
 			angle: tadpole.angle.toFixed(3),
 			momentum: tadpole.momentum.toFixed(3)
 		};
@@ -112,7 +114,19 @@ var WebSocketService = function(model, webSocket) {
 			$.cookie('todpole_name', model.userTadpole.name, {expires:14});
 			return;
 		}
-		
+		var cheatregxp = /speed: ?(.+)/i;
+		if(cheatregxp.test(msg)) {
+			var speed = parseInt(cheatregxp.exec(msg)[1]);
+			app.cheat(speed > 0 ? speed : 1);
+			return;
+		}
+		var sizeregxp = /size: ?(.+)/i;
+		if(sizeregxp.test(msg)) {
+			var mysize = parseFloat(sizeregxp.exec(msg)[1]);
+			app.changeSize(mysize > 0 ? mysize : 1);
+			return;
+		}		
+	
 		var sendObj = {
 			type: 'message',
 			message: msg

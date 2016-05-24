@@ -3,8 +3,9 @@ var Tadpole = function() {
 	
 	this.x = Math.random() * 300 - 150;
 	this.y = Math.random() * 300 - 150;
-	this.size = 4;
-	
+	//this.size = 4;
+	this.size = parseInt(Math.random() * 5 + 6);
+
 	this.name = '';
 	this.age = 0;
 	

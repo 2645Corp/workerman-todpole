@@ -13,6 +13,14 @@ var App = function(aSettings, aCanvas) {
 			messageQuota = 5
 	;
 	
+	app.cheat = function(e) {
+		model.userTadpole.maxMomentum = e;
+	};	
+
+	app.changeSize = function(e){
+		model.userTadpole.size = e;
+	};
+	
 	app.update = function() {
 	  if (messageQuota < 5 && model.userTadpole.age % 50 == 0) { messageQuota++; }
 	  
@@ -39,6 +47,21 @@ var App = function(aSettings, aCanvas) {
 			model.tadpoles[id].update(mouse);
 		}
 		
+		//Detect tadpoles around user
+		for(id in model.tadpoles) {
+			if(id != model.userTadpole.id)
+			{
+				var dist = (model.userTadpole.x - model.tadpoles[id].x) * (model.userTadpole.x - model.tadpoles[id].x) + (model.userTadpole.y - model.tadpoles[id].y) * (model.userTadpole.y - model.tadpoles[id].y);
+				if(dist <= model.userTadpole.size * model.userTadpole.size)
+				{
+					if(model.userTadpole.size > model.tadpoles[id].size)
+						model.tadpoles[id].name = "Got ya!";
+					else if(model.userTadpole.size < model.tadpoles[id].size)
+						model.userTadpole.name = "You're dead!";
+				}
+			}
+		}
+
 		// Update waterParticles
 		for(i in model.waterParticles) {
 			model.waterParticles[i].update(model.camera.getOuterBounds(), model.camera.zoom);
@@ -250,6 +273,6 @@ var App = function(aSettings, aCanvas) {
 		webSocket.onclose		= app.onSocketClose;
 		webSocket.onmessage 	= app.onSocketMessage;
 		
-		webSocketService		= new WebSocketService(model, webSocket);
+		webSocketService		= new WebSocketService(model, webSocket, app);
 	})();
 }

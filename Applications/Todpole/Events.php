@@ -60,7 +60,8 @@ class Events
                         'momentum' => $message_data["momentum"]+0,
                         'x'        => $message_data["x"]+0,
                         'y'        => $message_data["y"]+0,
-                        'life'     => 1,
+                        'size'	   => $message_data["size"]+0,
+			'life'     => 1,
                         'name'     => isset($message_data['name']) ? $message_data['name'] : 'Guest.'.$_SESSION['id'],
                         'authorized'  => false,
                         )
