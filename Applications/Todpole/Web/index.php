@@ -49,7 +49,7 @@ if(!function_exists('is_mobile'))
 		<?php if(!is_mobile()){?>
 			<div id="instructions">
 				<h2>介绍</h2>
-				<p>直接打字聊天!<br />输入 name: XX 则会设置你的昵称为XX<br />输入 size: XX 则会设置的的大小为XX<br />输入 speed: XX 则会设置你的速度为XX</p>
+				<p>直接打字聊天!<br />输入 name: XX 则会设置你的昵称为XX<br />输入 size: XX 则会设置你的大小为XX<br />输入 speed: XX 则会设置你的速度为XX</p>
 			</div>
 			<aside id="info">
 			<section id="share">
