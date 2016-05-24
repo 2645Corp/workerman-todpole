@@ -1,5 +1,12 @@
-workerman-todpole
-=================
+2645小蝌蚪+
+===
+
+2645小蝌蚪是2645QAQ改进的小蝌蚪聊天室（./游戏）
+
+[去访问它](http://linux.cool2645.com:8383/)
+
+#原作   workerman-todpole
+
 
 蝌蚪游泳交互程序 使用PHP（workerman框架）+HTML5开发
 

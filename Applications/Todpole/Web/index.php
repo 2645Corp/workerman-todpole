@@ -26,7 +26,7 @@ if(!function_exists('is_mobile'))
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Workerman小蝌蚪互动聊天室 HTML5+Websocket+PHP多进程socket实时推送技术</title>
+		<title>2645 小蝌蚪互动聊天室</title>
 		<link rel="stylesheet" type="text/css" href="css/main.css" />
 		<meta name="viewport" content="width=device-width; initial-scale=1.0; maximum-scale=1.0; minimum-scale=1.0; user-scalable=0;" />		
     <meta name="apple-mobile-web-app-capable" content="YES">
@@ -45,16 +45,18 @@ if(!function_exists('is_mobile'))
 		
 			<input id="chat" type="text" />
 			<div id="chatText"></div>
-			<h1>workerman</h1>
+			<h1>2645小蝌蚪+</h1>
 		<?php if(!is_mobile()){?>
 			<div id="instructions">
 				<h2>介绍</h2>
-				<p>直接打字聊天!<br />输入 name: XX 则会设置你的昵称为XX</p>
+				<p>直接打字聊天!<br />输入 name: XX 则会设置你的昵称为XX<br />输入 size: XX 则会设置的的大小为XX<br />输入 speed: XX 则会设置你的速度为XX</p>
 			</div>
 			<aside id="info">
 			<section id="share">
-				       <a rel="external" href="http://github.com/walkor/workerman-todpole" title="workerman-todpole at GitHub">源代码：<img src="css/images/github.png" alt="fork on github"></a>
+			<h2>
+				       <a rel="external" href="http://github.com/2645Corp/workerman-todpole" title="workerman-todpole at GitHub">2645#源代码：欢迎pull request<img src="css/images/github.png" alt="fork on github"></a>
 				       &nbsp;&nbsp;
+			</h2>
 			</section>
 			<section id="wtf">
 			
