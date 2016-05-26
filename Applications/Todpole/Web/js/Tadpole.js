@@ -153,13 +153,13 @@ var Tadpole = function() {
 		context.font = 7 + "px 'proxima-nova-1','proxima-nova-2', arial, sans-serif";
 		context.textBaseline = 'hanging';
 		var width = context.measureText(tadpole.name).width;
-		context.fillText(tadpole.name, tadpole.x - width/2, tadpole.y + 8);
+		context.fillText(tadpole.name, tadpole.x - width/2, tadpole.y + tadpole.size + 10);  //8
 	}
 	
 	var drawMessages = function(context) {
 		tadpole.messages.reverse();
 		for(var i = 0, len = tadpole.messages.length; i<len; i++) {
-			tadpole.messages[i].draw(context, tadpole.x+10, tadpole.y+5, i);
+			tadpole.messages[i].draw(context, tadpole.x+tadpole.size/2+10, tadpole.y-tadpole.size-5, i);
 		}
 		tadpole.messages.reverse();
 	};

@@ -15,7 +15,7 @@ var Message = function(msg) {
 		context.font = fontsize + "px 'proxima-nova-1','proxima-nova-2', arial, sans-serif";
 		context.textBaseline = 'hanging';
 		
-		var paddingH = 3;
+		var paddingH = 3;  //3
 		var paddingW = 6;
 		
 		var messageBox = {
