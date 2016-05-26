@@ -52,7 +52,8 @@ var App = function(aSettings, aCanvas) {
 			if(id != model.userTadpole.id)
 			{
 				var dist = (model.userTadpole.x - model.tadpoles[id].x) * (model.userTadpole.x - model.tadpoles[id].x) + (model.userTadpole.y - model.tadpoles[id].y) * (model.userTadpole.y - model.tadpoles[id].y);
-				if(dist <= model.userTadpole.size * model.userTadpole.size)
+				var sizeSum = model.userTadpole.size + model.tadpoles[id].size;
+				if(dist <= sizeSum * sizeSum)
 				{
 					if(model.userTadpole.size > model.tadpoles[id].size)
 						model.tadpoles[id].name = "Got ya!";
