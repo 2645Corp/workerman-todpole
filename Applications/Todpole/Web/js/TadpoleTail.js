@@ -3,13 +3,14 @@ var TadpoleTail = function(tadpole) {
 	tail.joints = [];
 	
 	var tadpole = tadpole;
-	var jointSpacing = 1.4;
+	var jointNum = 15;
+	
 	var animationRate = 0;
 	
 	
 	tail.update = function() {
+		var jointSpacing = (tadpole.size + 2 * Math.log(tadpole.size)/Math.log(Math.E) + 10) / jointNum;  //1.4
 		animationRate += (.2 + tadpole.momentum / 10);
-		
 		for(var i = 0, len = tail.joints.length; i < len; i++) {
 			var tailJoint = tail.joints[i];
 			var parentJoint = tail.joints[i-1] || tadpole;
@@ -22,7 +23,7 @@ var TadpoleTail = function(tadpole) {
 				anglediff -= Math.PI * 2;
 			}
 			
-			tailJoint.angle += anglediff * (jointSpacing * 3 + (Math.min(tadpole.momentum / 2, Math.PI * 1.8))) / 8;
+			tailJoint.angle += anglediff * (4.2 + (Math.min(tadpole.momentum / 2, Math.PI * 1.8))) / 8;  //3
 			tailJoint.angle += Math.cos(animationRate - (i / 3)) * ((tadpole.momentum + .3) / 40);
 			
 			if(i == 0) {
@@ -42,7 +43,7 @@ var TadpoleTail = function(tadpole) {
 			var tailJoint = tail.joints[i];
 			
 			var falloff = (tail.joints.length - i) / tail.joints.length;
-			var jointSize =  (tadpole.size - 1.8) * falloff;
+			var jointSize =  (tadpole.size - 1.8) * falloff;  //1.8
 			
 			var x1 = tailJoint.x + Math.cos(tailJoint.angle + Math.PI * 1.5) * jointSize;
 			var y1 = tailJoint.y + Math.sin(tailJoint.angle + Math.PI * 1.5) * jointSize;
@@ -64,7 +65,7 @@ var TadpoleTail = function(tadpole) {
 	};
 	
 	(function() {
-		for(var i = 0; i < 15; i++) {
+		for(var i = 0; i < jointNum; i++) {
 			tail.joints.push({
 				x: 0,
 				y: 0,
