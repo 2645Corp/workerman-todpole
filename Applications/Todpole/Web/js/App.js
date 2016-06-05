@@ -20,7 +20,6 @@ var App = function(aSettings, aCanvas) {
 	app.changeSize = function(e){
 		model.userTadpole.size = e;
 	};
-	
 	app.update = function() {
 	  if (messageQuota < 5 && model.userTadpole.age % 50 == 0) { messageQuota++; }
 	  
@@ -53,12 +52,24 @@ var App = function(aSettings, aCanvas) {
 			{
 				var dist = (model.userTadpole.x - model.tadpoles[id].x) * (model.userTadpole.x - model.tadpoles[id].x) + (model.userTadpole.y - model.tadpoles[id].y) * (model.userTadpole.y - model.tadpoles[id].y);
 				var sizeSum = model.userTadpole.size + model.tadpoles[id].size;
-				if(dist <= sizeSum * sizeSum)
+				if(dist <= sizeSum * sizeSum && !model.userTadpole.isBlinking)
 				{
 					if(model.userTadpole.size > model.tadpoles[id].size)
+					{
 						model.tadpoles[id].name = "Got ya!";
+						var aBite = Math.floor(model.tadpoles[id].size / 2);
+						if(!model.userTadpole.isGrowing)
+							model.userTadpole.startGrow(aBite);
+					}
 					else if(model.userTadpole.size < model.tadpoles[id].size)
-						model.userTadpole.name = "You're dead!";
+					{
+						//model.userTadpole.name = "You're dead!";
+						model.userTadpole.startBlink();  //Blink it!
+						
+						var aBite = Math.floor(model.userTadpole.size / 3);
+						model.userTadpole.size = model.userTadpole.size - aBite > 2 ? model.userTadpole.size - aBite : 2;
+						model.tadpoles[id].size += aBite;
+					}
 				}
 			}
 		}

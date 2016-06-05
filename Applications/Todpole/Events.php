@@ -61,6 +61,7 @@ class Events
                         'x'        => $message_data["x"]+0,
                         'y'        => $message_data["y"]+0,
                         'size'	   => $message_data["size"]+0,
+			   'isBlinking' => $message_data["isBlinking"],
 			'life'     => 1,
                         'name'     => isset($message_data['name']) ? $message_data['name'] : 'Guest.'.$_SESSION['id'],
                         'authorized'  => false,

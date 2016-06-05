@@ -21,7 +21,15 @@ var Tadpole = function() {
 	
 	this.messages = [];
 	this.timeSinceLastActivity = 0;
-	
+
+	this.timeSinceFirstBlink = 0;
+	this.isBlinking = false;
+	this.maxBlinkTime = 100;
+
+	this.isGrowing = false;
+	this.maxGrow = this.size;
+	this.growingSpeed = 0;
+
 	this.changed = 0;
 	this.timeSinceLastServerUpdate = 0;
 	
@@ -112,7 +120,27 @@ var Tadpole = function() {
 	};
 	
 	this.draw = function(context) {
-		var opacity = Math.max(Math.min(20 / Math.max(tadpole.timeSinceLastServerUpdate-300,1),1),.2).toFixed(3);
+		if(!this.isBlinking)
+			var opacity = Math.max(Math.min(20 / Math.max(tadpole.timeSinceLastServerUpdate-300,1),1),.2).toFixed(3);
+		else
+		{
+			//Blink it!
+			var opacity = Math.abs(Math.sin(0.3 * this.timeSinceFirstBlink++));
+			if(this.timeSinceFirstBlink > this.maxBlinkTime)
+			{
+				this.isBlinking = false;
+				this.timeSinceFirstBlink = 0;
+			}
+		}
+		if(this.isGrowing)
+		{
+			if(this.size >= this.maxGrow)
+				this.isGrowing = false;
+			else
+			{
+				this.size += this.growingSpeed;
+			}
+		}
 
 		if(tadpole.hover && isAuthorized()) {
 			context.fillStyle = 'rgba(192, 253, 247,'+opacity+')';
@@ -142,7 +170,19 @@ var Tadpole = function() {
 		drawName(context);
 		drawMessages(context);
 	};
-	
+
+	this.startBlink = function()
+	{
+		this.isBlinking = true;
+	};
+
+	this.startGrow = function(aBite)
+	{
+		this.maxGrow = this.size + aBite;
+		this.growingSpeed = aBite / 150;
+		this.isGrowing = true;
+	};
+
 	var isAuthorized = function() {
 		return tadpole.name.charAt('0') == "@";
 	};
@@ -163,7 +203,6 @@ var Tadpole = function() {
 		}
 		tadpole.messages.reverse();
 	};
-	
 	
 	// Constructor
 	(function() {

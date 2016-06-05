@@ -48,7 +48,9 @@ var WebSocketService = function(model, webSocket, app) {
 		
 		tadpole.angle = data.angle;
 		tadpole.momentum = data.momentum;
-		tadpole.size = data.size;	
+		tadpole.size = data.size;
+		if(data.isBlinking)
+			tadpole.startBlink();	
 		tadpole.timeSinceLastServerUpdate = 0;
 	}
 	
@@ -96,6 +98,7 @@ var WebSocketService = function(model, webSocket, app) {
 			x: tadpole.x.toFixed(1),
 			y: tadpole.y.toFixed(1),
 			size: tadpole.size.toFixed(3),
+			isBlinking: tadpole.isBlinking,
 			angle: tadpole.angle.toFixed(3),
 			momentum: tadpole.momentum.toFixed(3)
 		};
@@ -106,7 +109,7 @@ var WebSocketService = function(model, webSocket, app) {
 		
 		webSocket.send(JSON.stringify(sendObj));
 	}
-	
+
 	this.sendMessage = function(msg) {
 		var regexp = /name: ?(.+)/i;
 		if(regexp.test(msg)) {
